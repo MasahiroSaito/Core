@@ -1,0 +1,7 @@
+name: Core
+main: com.nepian.core.Core
+version: 1.0
+author: Nepian
+commands:
+    core:
+        usage: /<command>
