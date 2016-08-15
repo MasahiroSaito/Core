@@ -1,10 +1,13 @@
-package com.nepian.core.utils;
+package com.nepian.core;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import com.nepian.core.utils.FileUtil;
+import com.nepian.core.utils.Util;
 
 public abstract class ConfigBase {
 	protected File configFile;
