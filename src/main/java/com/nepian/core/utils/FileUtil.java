@@ -4,9 +4,6 @@ import java.io.File;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 
-/**
- * ファイルまわりのメソッド群
- */
 public class FileUtil {
 	
 	/**

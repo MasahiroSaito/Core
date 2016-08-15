@@ -13,6 +13,10 @@ public abstract class ConfigBase {
 	protected File configFile;
 	protected Map<String, Object> configs;
 	
+	/**
+	 * コンストラクタ
+	 * @param configFile 設定ファイル
+	 */
 	public ConfigBase(File configFile) {
 		this.configFile = configFile;
 		this.configs = Util.newMap();
