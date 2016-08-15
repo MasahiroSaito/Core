@@ -2,6 +2,8 @@ package com.nepian.core.utils;
 
 import java.io.File;
 
+import org.bukkit.configuration.file.YamlConfiguration;
+
 /**
  * ファイルまわりのメソッド群
  */
@@ -62,5 +64,14 @@ public class FileUtil {
 			}
 		}
 		return file;
+	}
+	
+	/**
+	 * YamlConfigurationを取得する
+	 * @param file
+	 * @return
+	 */
+	public static YamlConfiguration getYml(File file) {
+		return YamlConfiguration.loadConfiguration(file);
 	}
 }
