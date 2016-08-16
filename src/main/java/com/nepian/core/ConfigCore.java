@@ -9,15 +9,17 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import com.nepian.core.utils.FileUtil;
 import com.nepian.core.utils.Util;
 
-public abstract class ConfigBase {
+public abstract class ConfigCore {
 	protected File configFile;
 	protected Map<String, Object> configs;
+	
+	protected abstract void setConfigs();
 	
 	/**
 	 * コンストラクタ
 	 * @param configFile 設定ファイル
 	 */
-	public ConfigBase(File configFile) {
+	public ConfigCore(File configFile) {
 		this.configFile = configFile;
 		this.configs = Util.newMap();
 		this.setConfigs();
@@ -53,8 +55,6 @@ public abstract class ConfigBase {
 	protected void add(String key, Object value) {
 		configs.put(key, value);
 	}
-	
-	protected abstract void setConfigs();
 	
 	/**
 	 * 設定をファイルから読み込む
