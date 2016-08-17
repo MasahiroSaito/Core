@@ -1,6 +1,7 @@
 package com.nepian.core.utils;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -64,11 +65,24 @@ public class FileUtil {
 	}
 	
 	/**
-	 * YamlConfigurationを取得する
+	 * YamlConfiguration を取得する
 	 * @param file
 	 * @return
 	 */
 	public static YamlConfiguration getYml(File file) {
 		return YamlConfiguration.loadConfiguration(file);
+	}
+	
+	/**
+	 * YamlConfiguration を file に保存する
+	 * @param file
+	 * @param yml
+	 */
+	public static void saveYml(File file, YamlConfiguration yml) {
+		try {
+			yml.save(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
