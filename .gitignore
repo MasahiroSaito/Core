@@ -1,3 +1,7 @@
+.DS_Store
+.classpath
 .settings
-target/*
-!target/mvn-repo
+.project
+/target/*
+!/target/mvn-repo
+!/target/apidocs
