@@ -1,3 +1,4 @@
 .settings
 target/*
 !target/mvn-repo
+!target/apidocs
