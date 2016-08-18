@@ -5,3 +5,4 @@
 /target/*
 !/target/mvn-repo
 !/target/apidocs
+/target/
