@@ -1,4 +1,4 @@
-package com.nepian.core;
+package com.nepian.core.utils.sqlite;
 
 import java.io.File;
 import java.sql.Connection;

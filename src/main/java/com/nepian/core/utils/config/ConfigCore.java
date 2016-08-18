@@ -1,4 +1,4 @@
-package com.nepian.core;
+package com.nepian.core.utils.config;
 
 import java.io.File;
 import java.util.Map;
@@ -8,6 +8,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.nepian.core.utils.FileUtil;
 import com.nepian.core.utils.Util;
+import com.nepian.core.utils.exception.NotFoundKeyException;
+import com.nepian.core.utils.exception.SaveYamlConfigurationException;
 
 public class ConfigCore {
 	protected static final String FOLDER_NAME = "configs";
@@ -28,10 +30,13 @@ public class ConfigCore {
 		return configs.get(key);
 	}
 	
-	public void update(String key, Object value) {
+	public void update(String key, Object value)
+			throws SaveYamlConfigurationException, NotFoundKeyException {
 		if (configs.containsKey(key)) {
 			write(key, value);
 			configs.put(key, value);
+		} else {
+			throw new NotFoundKeyException(key);
 		}
 	}
 	
@@ -41,7 +46,8 @@ public class ConfigCore {
 		}
 	}
 	
-	private void write(String key, Object value) {
+	private void write(String key, Object value)
+			throws SaveYamlConfigurationException {
 		yaml.set(key, value);
 		FileUtil.saveYml(file, yaml);
 	}

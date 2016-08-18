@@ -5,18 +5,16 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class MessengerCore {
-	protected final JavaPlugin PLUGIN;
-	protected final String PREFIX;
-	protected final boolean DEBUG;
+public class Messenger {
+	private final String PREFIX;
+	private final boolean DEBUG;
 	
-	public MessengerCore(JavaPlugin plugin, boolean debug) {
-		this.PLUGIN = plugin;
-		this.PREFIX = "&d" + plugin.getName() + ":&r";
+	public Messenger(JavaPlugin plugin, boolean debug) {
+		this.PREFIX = "&d[" + plugin.getName() + "]&r ";
 		this.DEBUG = debug;
 	}
 	
-	public MessengerCore(JavaPlugin plugin) {
+	public Messenger(JavaPlugin plugin) {
 		this(plugin, false);
 	}
 	

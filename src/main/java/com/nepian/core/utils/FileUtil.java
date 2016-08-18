@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import com.nepian.core.utils.exception.SaveYamlConfigurationException;
+
 public class FileUtil {
 	
 	/**
@@ -77,12 +79,15 @@ public class FileUtil {
 	 * YamlConfiguration を file に保存する
 	 * @param file
 	 * @param yml
+	 * @throws SaveYamlConfigurationException 
 	 */
-	public static void saveYml(File file, YamlConfiguration yml) {
+	public static void saveYml(File file, YamlConfiguration yml)
+			throws SaveYamlConfigurationException {
 		try {
 			yml.save(file);
 		} catch (IOException e) {
 			e.printStackTrace();
+			throw new SaveYamlConfigurationException(file);
 		}
 	}
 }
