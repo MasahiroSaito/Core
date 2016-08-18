@@ -20,6 +20,10 @@ public class Config {
 		this.yaml = FileUtil.getYml(file);
 	}
 
+	/**
+	 * 設定を読み込む
+	 * @return
+	 */
 	protected Config read() {
 		for (Field field : clazz.getFields()) {
 			if (!isValidModifier(field.getModifiers())) continue;
@@ -43,6 +47,10 @@ public class Config {
 		return this;
 	}
 
+	/**
+	 * 設定を書き込む
+	 * @return
+	 */
 	protected Config write() {
 		for (Field field : clazz.getFields()) {
 			if (!isValidModifier(field.getModifiers())) continue;
@@ -69,6 +77,11 @@ public class Config {
 		return this;
 	}
 	
+	/**
+	 * 読み書き可能か判定する
+	 * @param modifier
+	 * @return
+	 */
 	private boolean isValidModifier(int modifier) {
 		if (!Modifier.isPublic(modifier)) return false;
 		if (!Modifier.isStatic(modifier)) return false;
