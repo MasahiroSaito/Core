@@ -8,8 +8,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Server;
 import org.bukkit.World;
 
 public class LocationUtil {
@@ -22,14 +22,13 @@ public class LocationUtil {
 	/**
 	 * 文字列からLocationインスタンスを作成する
 	 * @param string locationから取得した文字列
-	 * @param server ワールドを読み込むためのサーバ
 	 * @return 文字列から生成したLocationインスタンス
 	 */
-	public static Location fromString(String string, Server server) {
+	public static Location fromString(String string) {
 		String[] data = string.split(SPLIT);
 		
 		UUID worldUid = UUID.fromString(data[0]);
-		World world = server.getWorld(worldUid);
+		World world = Bukkit.getWorld(worldUid);
 		double x = Double.valueOf(data[1]);
 		double y = Double.valueOf(data[2]);
 		double z = Double.valueOf(data[3]);
@@ -86,17 +85,16 @@ public class LocationUtil {
 	/**
 	 * byte配列からLocationのインスタンスを生成する
 	 * @param bytes 読み込みたいLocationのbyte配列
-	 * @param server ワールドを読み込むためのサーバ
 	 * @return 読み込んだLocationをインスタンスとして返す
 	 */
-	public static Location fromByteArray(final byte[] bytes, final Server server) {
+	public static Location fromByteArray(final byte[] bytes) {
 		try {
 			ByteArrayInputStream byteis = new ByteArrayInputStream(bytes);
 			ObjectInputStream objis = new ObjectInputStream(byteis);
 			LocationSerializable ls = (LocationSerializable) objis.readObject();
 			byteis.close();
 			objis.close();
-			return ls.getLocation(server);
+			return ls.getLocation();
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -121,9 +119,8 @@ public class LocationUtil {
 			this.pitch = location.getPitch();
 		}
 		
-		private Location getLocation(Server server) {
-			World world = server.getWorld(worldUid);
-			return new Location(world, x, y, z, yaw, pitch);
+		private Location getLocation() {
+			return new Location(Bukkit.getWorld(worldUid), x, y, z, yaw, pitch);
 		}
 	}
 }
