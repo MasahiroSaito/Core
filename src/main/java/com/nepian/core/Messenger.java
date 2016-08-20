@@ -42,17 +42,17 @@ public class Messenger {
 		log("&4ERROR:&r " + obj);
 	}
 	
+	public void success(Object obj) {
+		log("&9SUCCESS:&r " + obj);
+	}
+	
+	public void failed(Object obj) {
+		log("&4FAILED:&r " + obj);
+	}
+	
 	public void debug(Object obj) {
 		if (DEBUG) {
 			log("&eDEBUG:&r " + obj);
 		}
-	}
-	
-	public void success(Object obj) {
-		debug("&9SUCCESS:&r " + obj);
-	}
-	
-	public void failed(Object obj) {
-		debug("&4FAILED:&r " + obj);
 	}
 }
