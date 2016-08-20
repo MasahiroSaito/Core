@@ -28,3 +28,5 @@ Maven の pom.xml に以下をそれぞれ追加することで、
   <version>2.0</version>
 </dependency>
 ```
+
+> API Document: [https://masahirosaito.github.io/Core/apidocs/](https://masahirosaito.github.io/Core/apidocs/)
