@@ -16,17 +16,31 @@ import com.nepian.core.utils.exception.InValidCommandSenderException;
 import com.nepian.core.utils.exception.NotHasCommandPermissionException;
 
 public abstract class MainCommand extends SubCommand implements CommandExecutor {
+	/**
+	 * 継承先から利用できるMessenger<br>
+	 * MainCommandのインスタンス生成時に自動で生成される
+	 */
 	protected Messenger messenger;
 	private List<SubCommand> subCommands;
 	
+	/**
+	 * 指定した名前と別名でインスタンスを生成する
+	 * @param plugin コマンドを実行するプラグイン
+	 * @param name コマンド名
+	 * @param names コマンドの別名(複数可)
+	 */
 	public MainCommand(JavaPlugin plugin, String name, String...names) {
 		super(name, names);
-		this.subCommands = Util.newList();
+		this.subCommands = Util.newArrayList();
 		this.messenger = new Messenger(plugin, false);
 	}
 	
-	protected void setSubCommand(SubCommand sub) {
-		subCommands.add(sub);
+	/**
+	 * サブコマンドを設定する
+	 * @param subCommand
+	 */
+	protected void setSubCommand(SubCommand subCommand) {
+		subCommands.add(subCommand);
 	}
 
 	@Override
@@ -43,17 +57,6 @@ public abstract class MainCommand extends SubCommand implements CommandExecutor 
 		return true;
 	}
 	
-	/**
-	 * MainCommand を実行する
-	 * @param sender
-	 * @param label
-	 * @param args
-	 * @return
-	 * @throws CommandException
-	 * @throws InValidCommandSenderException
-	 * @throws NotHasCommandPermissionException
-	 * @throws InValidCommandArgsException
-	 */
 	private boolean onMainCommand(CommandSender sender, String label, String[] args)
 			throws CommandException, InValidCommandSenderException,
 			NotHasCommandPermissionException, InValidCommandArgsException {
@@ -78,16 +81,6 @@ public abstract class MainCommand extends SubCommand implements CommandExecutor 
 		}
 	}
 	
-	/**
-	 * SubCommand を実行する
-	 * @param sender
-	 * @param label
-	 * @param args
-	 * @return
-	 * @throws InValidCommandSenderException
-	 * @throws NotHasCommandPermissionException
-	 * @throws InValidCommandArgsException
-	 */
 	private boolean onSubCommand(CommandSender sender, String label, String[] args)
 			throws InValidCommandSenderException, NotHasCommandPermissionException,
 			InValidCommandArgsException {

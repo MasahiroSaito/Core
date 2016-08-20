@@ -11,25 +11,25 @@ public class Util {
 	
 	/**
 	 * HashMapを生成する
-	 * @return
+	 * @return HashMapで生成したMap
 	 */
-	public static <T, V> Map<T, V> newMap() {
+	public static <T, V> Map<T, V> newHashMap() {
 		return new HashMap<T, V>();
 	}
 	
 	/**
 	 * HashSetを生成する
-	 * @return
+	 * @return HashSetで生成したSet
 	 */
-	public static <T> Set<T> newSet() {
+	public static <T> Set<T> newHashSet() {
 		return new HashSet<T>();
 	}
 	
 	/**
 	 * ArrayListを生成する
-	 * @return
+	 * @return ArrayListで生成したList
 	 */
-	public static <T> List<T> newList() {
+	public static <T> List<T> newArrayList() {
 		return new ArrayList<T>();
 	}
 }
