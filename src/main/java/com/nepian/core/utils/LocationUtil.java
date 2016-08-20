@@ -1,25 +1,35 @@
 package com.nepian.core.utils;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.UUID;
 
 import org.bukkit.Location;
+import org.bukkit.Server;
 import org.bukkit.World;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class LocationUtil {
-	private static final String SPLIT = "__";
 	
 	/**
-	 * 文字列からロケーションデータを作成する
-	 * @param plugin
-	 * @param string
-	 * @return
+	 * Locationを文字列に変換する際、データを切り分ける文字列
 	 */
-	public static Location toLocation(JavaPlugin plugin, String string) {
+	public static final String SPLIT = "__";
+	
+	/**
+	 * 文字列からLocationインスタンスを作成する
+	 * @param string locationから取得した文字列
+	 * @param server ワールドを読み込むためのサーバ
+	 * @return 文字列から生成したLocationインスタンス
+	 */
+	public static Location fromString(String string, Server server) {
 		String[] data = string.split(SPLIT);
 		
 		UUID worldUid = UUID.fromString(data[0]);
-		World world = plugin.getServer().getWorld(worldUid);
+		World world = server.getWorld(worldUid);
 		double x = Double.valueOf(data[1]);
 		double y = Double.valueOf(data[2]);
 		double z = Double.valueOf(data[3]);
@@ -30,11 +40,11 @@ public class LocationUtil {
 	}
 	
 	/**
-	 * ロケーションデータを文字列に変換する
-	 * @param location
-	 * @return
+	 * Locationを文字列として取得する
+	 * @param location Locationのインスタンス
+	 * @return Locationの文字列
 	 */
-	public static String toString(Location location) {
+	public static String asString(Location location) {
 		StringBuilder data = new StringBuilder("");
 		
 		World world = location.getWorld();
@@ -52,5 +62,68 @@ public class LocationUtil {
 		data.append(pitch);
 		
 		return data.toString();
+	}
+	
+	/**
+	 * Locationをバイト配列として取得する
+	 * @param location 対象のロケーション
+	 * @return Locationのバイト配列
+	 */
+	public static byte[] asByteArray(final Location location) {
+		try {
+			ByteArrayOutputStream byteos = new ByteArrayOutputStream();
+			ObjectOutputStream objos = new ObjectOutputStream(byteos);
+			objos.writeObject(new LocationSerializable(location));
+			objos.close();
+			byteos.close();
+			return byteos.toByteArray();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * byte配列からLocationのインスタンスを生成する
+	 * @param bytes 読み込みたいLocationのbyte配列
+	 * @param server ワールドを読み込むためのサーバ
+	 * @return 読み込んだLocationをインスタンスとして返す
+	 */
+	public static Location fromByteArray(final byte[] bytes, final Server server) {
+		try {
+			ByteArrayInputStream byteis = new ByteArrayInputStream(bytes);
+			ObjectInputStream objis = new ObjectInputStream(byteis);
+			LocationSerializable ls = (LocationSerializable) objis.readObject();
+			byteis.close();
+			objis.close();
+			return ls.getLocation(server);
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	private static class LocationSerializable implements Serializable {
+		private static final long serialVersionUID = 1L;
+		private UUID worldUid;
+		private int x;
+		private int y;
+		private int z;
+		private float yaw;
+		private float pitch;
+
+		private LocationSerializable(Location location) {
+			this.worldUid = location.getWorld().getUID();
+			this.x = location.getBlockX();
+			this.y = location.getBlockY();
+			this.z = location.getBlockZ();
+			this.yaw = location.getYaw();
+			this.pitch = location.getPitch();
+		}
+		
+		private Location getLocation(Server server) {
+			World world = server.getWorld(worldUid);
+			return new Location(world, x, y, z, yaw, pitch);
+		}
 	}
 }
