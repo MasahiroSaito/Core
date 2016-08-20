@@ -1,17 +1,19 @@
 package com.nepian.core;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Messenger {
 	private final String PREFIX;
 	private final boolean DEBUG;
+	private final ConsoleCommandSender CONSOLE_SENDER;
 	
 	public Messenger(JavaPlugin plugin, boolean debug) {
 		this.PREFIX = "&d[" + plugin.getName() + "]&r ";
 		this.DEBUG = debug;
+		this.CONSOLE_SENDER = plugin.getServer().getConsoleSender();
 	}
 	
 	public Messenger(JavaPlugin plugin) {
@@ -35,7 +37,7 @@ public class Messenger {
 	}
 	
 	public void log(Object obj) {
-		send(Bukkit.getServer().getConsoleSender(), obj);
+		send(CONSOLE_SENDER, obj);
 	}
 	
 	public void error(Object obj) {
