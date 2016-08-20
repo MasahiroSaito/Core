@@ -2,5 +2,4 @@
 .classpath
 .settings
 .project
-/target/*
-!/target/mvn-repo
+/target/
