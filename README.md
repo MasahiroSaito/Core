@@ -15,6 +15,6 @@
 <dependency>
   <groupId>com.Nepian.Spigot</groupId>
   <artifactId>Core</artifactId>
-  <version>1.0</version>
+  <version>1.4</version>
 </dependency>
 ```
