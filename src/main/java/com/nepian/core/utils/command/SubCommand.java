@@ -23,6 +23,14 @@ public abstract class SubCommand {
 		this(name, new String[0]);
 	}
 	
+	protected void setPermission(String permission) {
+		this.permission = permission;
+	}
+	
+	protected void setSenderType(CommandSenderType type) {
+		this.senderTypes.add(type);
+	}
+	
 	/**
 	 * コマンドを実行する
 	 * @param sender コマンド送信者
@@ -44,7 +52,7 @@ public abstract class SubCommand {
 	 * @param sender コマンド送信者
 	 * @return
 	 */
-	public final boolean hasPermission(CommandSender sender) {
+	protected final boolean hasPermission(CommandSender sender) {
 		if (permission == null) return true;
 		return sender.hasPermission(permission);
 	}
@@ -54,7 +62,7 @@ public abstract class SubCommand {
 	 * @param name コマンド名
 	 * @return
 	 */
-	public final boolean isValidTrigger(String name) {
+	protected final boolean isValidTrigger(String name) {
 		if (name.equalsIgnoreCase(this.name)) return true;
 		if (aliases != null) {
 			for (String alias : aliases) {
@@ -69,7 +77,7 @@ public abstract class SubCommand {
 	 * @param sender コマンド送信者
 	 * @return
 	 */
-	public final boolean isValidCommandSender(CommandSender sender) {
+	protected final boolean isValidCommandSender(CommandSender sender) {
 		if (senderTypes.isEmpty()) return true;
 		for (CommandSenderType type : senderTypes) {
 			if (type.isValid(sender)) return true;

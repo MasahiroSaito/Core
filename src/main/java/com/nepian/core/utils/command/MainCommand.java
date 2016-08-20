@@ -24,6 +24,10 @@ public abstract class MainCommand extends SubCommand implements CommandExecutor 
 		this.subCommands = Util.newList();
 		this.messenger = new Messenger(plugin, false);
 	}
+	
+	protected void setSubCommand(SubCommand sub) {
+		subCommands.add(sub);
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender,
