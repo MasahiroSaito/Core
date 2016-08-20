@@ -13,7 +13,7 @@ public class FileUtil {
 	 * ファイルを読み込む
 	 * @param folder
 	 * @param fileName
-	 * @return
+	 * @return File
 	 */
 	public static File loadFile(File folder, String fileName) {
 		return load(folder, fileName, FileType.FILE);
@@ -23,7 +23,7 @@ public class FileUtil {
 	 * フォルダを読み込む
 	 * @param folder
 	 * @param fileName
-	 * @return
+	 * @return File
 	 */
 	public static File loadFolder(File folder, String fileName) {
 		return load(folder, fileName, FileType.FOLDER);
@@ -40,8 +40,8 @@ public class FileUtil {
 	 * ファイルかフォルダをロードする
 	 * @param folder
 	 * @param fileName
-	 * @param type
-	 * @return
+	 * @param type ロードする種類をFileTypeから選択する
+	 * @return File
 	 */
 	public static File load(File folder, String fileName, FileType type) {
 		File file = new File(folder, fileName);
@@ -69,7 +69,7 @@ public class FileUtil {
 	/**
 	 * YamlConfiguration を取得する
 	 * @param file
-	 * @return
+	 * @return YamlConfiguration
 	 */
 	public static YamlConfiguration getYml(File file) {
 		return YamlConfiguration.loadConfiguration(file);

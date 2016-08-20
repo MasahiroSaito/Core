@@ -14,19 +14,24 @@ public class SQLite {
 	private File file;
 	private Connection connection;
 	
+	/**
+	 * ファイルで生成する
+	 * @param file
+	 */
 	public SQLite(File file) {
 		this.file = file;
 		this.connection = connect();
 	}
 	
+	/**
+	 * プラグインのフォルダにファイル名で生成する
+	 * @param plugin
+	 * @param fileName 拡張子(.db)を含めたファイル名
+	 */
 	public SQLite(JavaPlugin plugin, String fileName) {
 		this(FileUtil.loadFile(plugin.getDataFolder(), fileName));
 	}
 	
-	/**
-	 * データベースと接続する
-	 * @return
-	 */
 	private Connection connect() {
 		Connection c = null;
 		try {
@@ -52,7 +57,7 @@ public class SQLite {
 	/**
 	 * PreparedStatement を取得する
 	 * @param token
-	 * @return
+	 * @return PreparedStatement
 	 * @throws SQLException
 	 */
 	public PreparedStatement getPreparedStatement(String token) throws SQLException {
@@ -61,7 +66,7 @@ public class SQLite {
 	
 	/**
 	 * Connection を取得する
-	 * @return
+	 * @return Connection
 	 */
 	public Connection getConnection() {
 		return connection;
@@ -69,7 +74,6 @@ public class SQLite {
 	
 	/**
 	 * executeUpdateを実行する
-	 * @param sqlite SQLiteインスタンス
 	 * @param token 実行する完全なトークン
 	 */
 	public void executeUpdate(final String token) {

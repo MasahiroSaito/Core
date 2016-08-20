@@ -15,7 +15,7 @@ public class ConfigLoader {
 
 	public ConfigLoader(JavaPlugin plugin, String folderName, Class<? extends Configs> clazzs) {
 		this.folder = FileUtil.loadFolder(plugin.getDataFolder(), folderName);
-		this.configs = Util.newMap();
+		this.configs = Util.newHashMap();
 		this.putConfigs(clazzs);
 		this.readAll();
 		this.writeAll();

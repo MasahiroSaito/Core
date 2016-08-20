@@ -14,6 +14,12 @@ public class Config {
 	private File file;
 	private YamlConfiguration yaml;
 
+	/**
+	 * コンストラクタ
+	 * @param clazz 設定が書かれたクラス
+	 * @param name 設定ファイルの名前
+	 * @param folder 設定ファイルの保存先
+	 */
 	protected Config(Class<?> clazz, String name, File folder) {
 		this.clazz = clazz;
 		this.file = FileUtil.loadFile(folder, name + ".yml");
@@ -22,7 +28,7 @@ public class Config {
 
 	/**
 	 * 設定を読み込む
-	 * @return
+	 * @return Config(自分自身)
 	 */
 	protected Config read() {
 		for (Field field : clazz.getFields()) {
@@ -49,7 +55,7 @@ public class Config {
 
 	/**
 	 * 設定を書き込む
-	 * @return
+	 * @return Config(自分自身)
 	 */
 	protected Config write() {
 		for (Field field : clazz.getFields()) {
@@ -77,11 +83,6 @@ public class Config {
 		return this;
 	}
 	
-	/**
-	 * 読み書き可能か判定する
-	 * @param modifier
-	 * @return
-	 */
 	private boolean isValidModifier(int modifier) {
 		if (!Modifier.isPublic(modifier)) return false;
 		if (!Modifier.isStatic(modifier)) return false;
