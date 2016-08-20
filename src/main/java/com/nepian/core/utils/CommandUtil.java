@@ -15,6 +15,5 @@ public class CommandUtil {
 	public static void registerCommand(JavaPlugin plugin,
 			String name, CommandExecutor command) {
 		Bukkit.getPluginCommand(name).setExecutor(command);
-//		plugin.getCommand(name).setExecutor(command);
 	}
 }
