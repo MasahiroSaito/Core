@@ -1,5 +1,6 @@
 package com.nepian.core.utils;
 
+import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -11,6 +12,6 @@ public class ListenerUtil {
 	 * @param listener
 	 */
 	public static void register(JavaPlugin plugin, Listener listener) {
-		plugin.getServer().getPluginManager().registerEvents(listener, plugin);
+		Bukkit.getPluginManager().registerEvents(listener, plugin);
 	}
 }

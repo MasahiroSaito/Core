@@ -1,5 +1,6 @@
 package com.nepian.core.utils;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -13,6 +14,7 @@ public class CommandUtil {
 	 */
 	public static void registerCommand(JavaPlugin plugin,
 			String name, CommandExecutor command) {
-		plugin.getCommand(name).setExecutor(command);
+		Bukkit.getPluginCommand(name).setExecutor(command);
+//		plugin.getCommand(name).setExecutor(command);
 	}
 }
