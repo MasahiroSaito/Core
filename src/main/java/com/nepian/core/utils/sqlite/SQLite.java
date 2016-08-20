@@ -66,4 +66,17 @@ public class SQLite {
 	public Connection getConnection() {
 		return connection;
 	}
+	
+	/**
+	 * executeUpdateを実行する
+	 * @param sqlite SQLiteインスタンス
+	 * @param token 実行する完全なトークン
+	 */
+	public void executeUpdate(final String token) {
+		try {
+			getPreparedStatement(token).executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
